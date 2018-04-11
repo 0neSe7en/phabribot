@@ -16,7 +16,7 @@ const regex = {
 
 const handler = new SlackHandler()
   .onText(regex.basicObj, async context => {
-    const response = await handler.fetchObjectInfo(context.event.text) ;
+    const response = await handlers.fetchObjectInfo(context.event.text) ;
     await context.sendText(response);
   })
   .onEvent(async context => {
