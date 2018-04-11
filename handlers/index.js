@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const conduit = require('../conduit');
 
 async function fetchObjectInfo(text, formatFunc) {
@@ -9,7 +10,7 @@ async function fetchObjectInfo(text, formatFunc) {
   } else {
     return _.map(result, (v, objName) => {
       return `*${objName}* _${v.status}_ : ${v.fullName.slice(objName.length + 1)} \n${v.uri}`
-    })
+    }).join('\n')
   }
 }
 
