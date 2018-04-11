@@ -1,3 +1,7 @@
+.sessions
+.idea
+# Taken from https://github.com/github/gitignore/blob/master/Node.gitignore
+
 # Logs
 logs
 *.log
@@ -20,6 +24,9 @@ coverage
 # nyc test coverage
 .nyc_output
 
+# jest-junit
+junit.xml
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -29,7 +36,7 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
+# Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
 # Dependency directories
@@ -56,4 +63,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
