@@ -15,6 +15,5 @@ async function fetchObjectInfo(text, formatFunc) {
 }
 
 module.exports = {
-  text: require('./text'),
   fetchObjectInfo
 }

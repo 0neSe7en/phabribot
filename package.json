@@ -1,18 +1,25 @@
 {
   "name": "phabribot",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=8.6.0"
+  },
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint ./"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bottender": "0.14.31",
     "dotenv": "^5.0.1",
     "lodash": "^4.17.5",
+    "pino": "^4.16.1",
     "query-string": "^6.0.0"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-node": "^6.0.1",
     "nodemon": "^1.17.3"
   }
 }

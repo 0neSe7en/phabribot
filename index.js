@@ -1,8 +1,8 @@
-const _ = require('lodash');
+const pino = require('pino')();
 const { SlackBot, FileSessionStore, SlackHandler } = require('bottender');
 const { createServer } = require('bottender/express');
-const handlers = require('./handlers');
 
+const handlers = require('./handlers');
 const config = require('./bottender.config.js').slack;
 
 const bot = new SlackBot({
@@ -19,15 +19,6 @@ const handler = new SlackHandler()
     const response = await handlers.fetchObjectInfo(context.event.text) ;
     await context.sendText(response);
   })
-  .onEvent(async context => {
-    let res;
-    if (context.event.isText) {
-      res = await handlers.text(context, context.event.text, context.event.user);
-    }
-    if (res) {
-      await context.sendText(res);
-    }
-  });
 
 bot.onEvent(handler);
 bot.createRtmRuntime();
@@ -35,5 +26,5 @@ bot.createRtmRuntime();
 const server = createServer(bot);
 
 server.listen(5000, () => {
-  console.log('server is running on 5000 port...');
+  pino.info('server is running on 5000 port...');
 });
