@@ -12,14 +12,12 @@ ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
 WORKDIR /app
-COPY package.json yarn.lock /app/
-RUN yarn install
+COPY package.json /app/
+RUN npm install
 
 COPY conduit/ /app/conduit
 COPY handlers/ /app/handlers
 COPY bottender.config.js /app/bottender.config.js
 COPY index.js /app/index.js
-
-COPY .env /app/.env
 
 CMD [ "pm2-runtime", "start", "index.js" ]
