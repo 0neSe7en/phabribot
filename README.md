@@ -1,4 +1,6 @@
 # phabribot
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/0neSe7en/phabribot.svg)](https://greenkeeper.io/)
 A phabricator bot for slack.
 
 ## Features
