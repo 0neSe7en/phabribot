@@ -10,12 +10,11 @@
     "lint": "eslint ./"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "bottender": "0.14.32",
     "dotenv": "^5.0.1",
     "lodash": "^4.17.5",
     "pino": "^4.16.1",
-    "query-string": "^6.0.0"
+    "superagent": "^3.8.2"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

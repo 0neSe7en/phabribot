@@ -1,22 +1,19 @@
 require('dotenv').config();
-const axios = require('axios');
-const qs = require('query-string');
+const superagent = require('superagent');
+const url = require('url');
 
-const instance = axios.create({
-  baseURL: process.env.PHABRICATOR_DOMAIN,
-  method: 'POST',
-  timeout: 5000,
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-  }
-})
+const baseURL = process.env.PHABRICATOR_DOMAIN;
 
-module.exports = {
-  instance,
-  post(url, args) {
-    return instance.post(url, qs.stringify({
+function post(api, args) {
+  return superagent
+    .post(url.resolve(baseURL, api))
+    .set('Content-Type', 'application/x-www-form-urlencoded')
+    .send({
       'api.token': process.env.CONDUIT_TOKEN,
       ...args
-    }, { arrayFormat: 'index' }))
-  }
+    })
+}
+
+module.exports = {
+  post,
 };

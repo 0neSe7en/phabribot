@@ -4,5 +4,5 @@ const client = require('./client');
 module.exports = async (objectName) => {
   return client.post('/api/phid.lookup', {
     names: _.isArray(objectName) ? objectName : [objectName]
-  }).then(res => res.data.result);
+  }).then(res => res.body.result);
 }
