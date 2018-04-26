@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const pino = require('pino')();
 const conduit = require('../conduit');
+const baseURL = process.env.PHABRICATOR_DOMAIN
 
 async function fetchObjectInfo(text, formatFunc) {
   let objects = text.match(/[DT]\d+/g);
@@ -16,6 +17,26 @@ async function fetchObjectInfo(text, formatFunc) {
   }
 }
 
+async function DOfAuthor(text) {
+  const [origin, author, limit] = text.slice(1, -1).match(/(.+) (\d+)/)
+  const result = await conduit.searchRevision({
+    queryKey: 'active',
+    constraints: {
+      authorPHIDs: [author],
+    },
+    limit,
+  })
+  pino.info(result)
+  const data = result.data
+  if(data.length == 0){
+    return `No Open Differential Of ${author}`
+  }
+  return data.map((revision) => {
+    return `*D${revision.id}* ${revision.fields.title}\n ${baseURL}/D${revision.id}`
+  }).join('\n')
+}
+
 module.exports = {
-  fetchObjectInfo
+  fetchObjectInfo,
+  DOfAuthor: DOfAuthor,
 }
