@@ -8,6 +8,7 @@ A phabricator bot for slack.
 ## Features
 
 - resolve object details by `{Txxx}`, `{Dxxx}`.
+- get recent revision by `@phabribot diff author limit`.
 
 ## Usage
 
@@ -29,3 +30,4 @@ $ docker run -d -e SLACK_TOKEN=xoxb-xxxxx -e SLACK_VERIFICATION=xxxx -e CONDUIT_
 - **SLACK_VERIFICATION**: `xxx`
 - **CONDUIT_TOKEN**: `api-`
 - **PHABRICATOR_DOMAIN**: `https://phabricator.domain.com`
+- **BOTNAME**: `phabribot`

@@ -1,6 +1,7 @@
 const pino = require('pino')();
 const {SlackBot, FileSessionStore, SlackHandler} = require('bottender');
 const {createServer} = require('bottender/express');
+const utils = require('./utils');
 
 const handlers = require('./handlers');
 const config = require('./bottender.config.js').slack;
@@ -12,7 +13,7 @@ const bot = new SlackBot({
 
 const regex = {
   basicObj: /\{[DT]\d+\}/g,
-  recentDOfAuthor: /\{.+ \d+\}/g, // {author limit}
+  recentDiffOfAuthor: /<@(.+)>\s+((D|d)(iff)?)\s+(.+)\s+(\d+)/, // {author limit}
 }
 
 const handler = new SlackHandler()
@@ -20,8 +21,20 @@ const handler = new SlackHandler()
     const response = await handlers.fetchObjectInfo(context.event.text);
     await context.sendText(response);
   })
-  .onText(regex.recentDOfAuthor, async (ctx) => {
-    const response = await handlers.DOfAuthor(ctx.event.text)
+  .onText(regex.recentDiffOfAuthor, async (ctx) => {
+    const bot = utils.slack.getBot(ctx.session, process.env.BOTNAME);
+    if (!bot) {
+      pino.error('Can not found bot?');
+      return;
+    }
+    const matches = ctx.event.text.match(regex.recentDiffOfAuthor);
+    if (!matches) {
+      return;
+    }
+    if (matches[1] !== bot.id) {
+      return;
+    }
+    const response = await handlers.diffOfAuthor(matches)
     await ctx.sendText(response)
   })
 

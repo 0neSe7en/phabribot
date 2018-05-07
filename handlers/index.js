@@ -17,8 +17,8 @@ async function fetchObjectInfo(text, formatFunc) {
   }
 }
 
-async function DOfAuthor(text) {
-  const [origin, author, limit] = text.slice(1, -1).match(/(.+) (\d+)/)
+async function diffOfAuthor(matches) {
+  const [origin, botId, objectType, , , author, limit] = matches;
   const result = await conduit.searchRevision({
     queryKey: 'active',
     constraints: {
@@ -28,7 +28,7 @@ async function DOfAuthor(text) {
   })
   pino.info(result)
   const data = result.data
-  if(data.length == 0){
+  if(data.length === 0){
     return `No Open Differential Of ${author}`
   }
   return data.map((revision) => {
@@ -38,5 +38,5 @@ async function DOfAuthor(text) {
 
 module.exports = {
   fetchObjectInfo,
-  DOfAuthor: DOfAuthor,
+  diffOfAuthor,
 }
