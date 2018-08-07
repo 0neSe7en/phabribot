@@ -13,7 +13,7 @@
     "bottender": "0.14.33",
     "dotenv": "^5.0.1",
     "lodash": "^4.17.5",
-    "pino": "^4.16.1",
+    "pino": "^5.0.0",
     "superagent": "^3.8.2"
   },
   "devDependencies": {
