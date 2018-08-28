@@ -7,8 +7,8 @@ A phabricator bot for slack.
 
 ## Features
 
-- resolve object details by `{Txxx}`, `{Dxxx}`.
-- get recent revision by `@phabribot diff author limit`.
+- Resolve object details by `{Txxx}`, `{Dxxx}`.
+- Get recent revision by `@phabribot diff author limit`.
 
 ## Usage
 
