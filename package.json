@@ -10,7 +10,7 @@
     "lint": "eslint ./"
   },
   "dependencies": {
-    "bottender": "0.15.0",
+    "bottender": "1.4.5",
     "dotenv": "^5.0.1",
     "lodash": "^4.17.5",
     "pino": "^5.0.0",
